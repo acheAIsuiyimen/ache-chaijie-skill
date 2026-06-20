@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>{{ACCOUNT_NAME}} 小红书账号拆解报告</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f7f5;
+      --paper: #fff;
+      --ink: #22201f;
+      --muted: #726d6a;
+      --line: #e6e3e0;
+      --soft: #f1efed;
+      --accent: #e52b47; /* Replace from creator covers. */
+      --accent-soft: #fff0f3;
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--bg); font: 15px/1.65 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; letter-spacing: 0; }
+    h1, h2, h3, p, span, a, code, td, th { overflow-wrap: anywhere; }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    .shell { display: grid; grid-template-columns: 236px minmax(0,1fr); min-height: 100dvh; }
+    .sidebar { position: sticky; top: 0; height: 100dvh; padding: 24px 18px; border-right: 1px solid var(--line); background: rgba(255,255,255,.94); }
+    .brand { display: flex; align-items: center; gap: 10px; margin: 0 6px 26px; font-weight: 750; }
+    .brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: var(--radius); color: #fff; background: var(--accent); }
+    .nav { display: grid; gap: 4px; }
+    .nav a { min-height: 38px; display: flex; align-items: center; padding: 8px 10px; border-radius: var(--radius); color: #67615e; text-decoration: none; font-size: 14px; }
+    .nav a:hover, .nav a.active { color: var(--ink); background: var(--soft); }
+    .side-note { position: absolute; left: 24px; bottom: 26px; color: var(--muted); font-size: 12px; }
+    .topbar { display: none; }
+    main { min-width: 0; }
+    .wrap { width: min(1180px, calc(100% - 56px)); margin: 0 auto; }
+    .hero { min-height: 610px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding: 54px 0 48px; }
+    .profile { display: flex; align-items: center; gap: 13px; margin-bottom: 22px; }
+    .avatar { width: 58px; height: 58px; object-fit: cover; border: 1px solid var(--line); border-radius: 50%; background: var(--soft); }
+    .profile strong { display: block; font-size: 18px; }
+    .profile span { color: var(--muted); font-size: 13px; }
+    h1 { max-width: 720px; margin: 0; font-size: clamp(42px,4.2vw,60px); line-height: 1.05; }
+    .lead { max-width: 650px; margin: 22px 0 0; color: #5f5956; font-size: 17px; }
+    .actions { display: flex; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+    .btn { display: inline-flex; min-height: 42px; align-items: center; padding: 9px 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); text-decoration: none; font-weight: 700; }
+    .btn.primary { color: #fff; border-color: var(--accent); background: var(--accent); }
+    .hero-visual { position: relative; }
+    .hero-cover { width: min(440px,100%); aspect-ratio: 3/4; margin-left: auto; object-fit: contain; border-radius: var(--radius); background: var(--soft); }
+    .verdict { position: absolute; left: -28px; bottom: 46px; width: min(330px,84%); padding: 18px; border: 1px solid color-mix(in srgb,var(--accent) 35%,white); border-radius: var(--radius); background: rgba(255,255,255,.95); }
+    .verdict b { color: var(--accent); }
+    .verdict p { margin: 5px 0 0; color: #5f5956; font-size: 14px; }
+    .metrics { display: grid; grid-template-columns: repeat(4,1fr); border-block: 1px solid var(--line); }
+    .metric { padding: 22px; border-right: 1px solid var(--line); }
+    .metric:last-child { border-right: 0; }
+    .metric strong { display: block; font-size: 28px; line-height: 1.2; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .summary { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 14px; padding: 34px 0 60px; }
+    .summary article, .card { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+    .summary article:first-child { color: #fff; border-color: #292625; background: #292625; }
+    .label { display: block; margin-bottom: 10px; color: var(--accent); font-size: 12px; font-weight: 800; }
+    .summary article:first-child .label { color: color-mix(in srgb,var(--accent) 55%,white); }
+    .summary h2, .card h3 { margin: 0; line-height: 1.35; }
+    .summary p, .card p { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+    .summary article:first-child p { color: #d5cfcc; }
+    section { padding: 68px 0; border-top: 1px solid var(--line); scroll-margin-top: 18px; }
+    .section-head { max-width: 780px; margin-bottom: 30px; }
+    .section-head h2 { margin: 0; font-size: clamp(30px,4vw,48px); line-height: 1.15; }
+    .section-head p { margin: 12px 0 0; color: var(--muted); }
+    .callout { padding: 20px 22px; border-left: 4px solid var(--accent); background: var(--accent-soft); font-weight: 700; }
+    .stages { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .stage { padding: 24px; background: var(--paper); border-right: 1px solid var(--line); }
+    .stage:last-child { border-right: 0; }
+    .stage time { display: block; margin-bottom: 12px; color: var(--accent); font-size: 12px; font-weight: 800; }
+    .stage h3 { margin: 0 0 8px; }
+    .stage p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+    .stage .shift { padding-top: 12px; border-top: 1px solid var(--line); color: var(--ink); }
+    .chart { display: grid; grid-template-columns: 280px 1fr; gap: 28px; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+    .chart-placeholder { min-height: 220px; display: grid; place-items: center; color: var(--muted); border-bottom: 1px solid var(--line); }
+    .table-wrap { margin-top: 22px; overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+    table { width: 100%; min-width: 760px; border-collapse: collapse; }
+    th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); background: #faf9f8; font-size: 12px; }
+    tr:last-child td { border-bottom: 0; }
+    .diagnosis { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .diagnosis .card:last-child { grid-column: 1/-1; }
+    .card-head { display: flex; justify-content: space-between; gap: 12px; }
+    .grade { color: var(--accent); font-size: 12px; font-weight: 800; }
+    .action { padding-top: 10px; border-top: 1px solid var(--line); color: var(--ink) !important; font-weight: 700; }
+    .covers { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; }
+    .cover-card { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+    .cover-frame { aspect-ratio: 3/4; display: grid; place-items: center; overflow: hidden; background: var(--soft); }
+    .cover-frame img { width: 100%; height: 100%; object-fit: contain; }
+    .cover-meta { padding: 13px; font-size: 13px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .formula { padding: 26px; color: #fff; border-radius: var(--radius); background: #292625; }
+    .formula code { white-space: pre-wrap; color: color-mix(in srgb,var(--accent) 45%,white); line-height: 1.85; }
+    .sources { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-bottom: 80px; }
+    .sources p { color: var(--muted); font-size: 13px; }
+    @media (max-width:980px) {
+      .shell { display: block; }
+      .sidebar { display: none; }
+      .topbar { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; min-height: 58px; padding: 10px 18px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.95); }
+      .wrap { width: min(100% - 32px,760px); }
+      .hero { min-height: auto; grid-template-columns: 1fr; }
+      .hero-cover { margin: 0 auto; }
+      .verdict { left: 0; }
+      .summary, .chart, .two-col, .sources { grid-template-columns: 1fr; }
+      .covers, .stages { grid-template-columns: repeat(2,1fr); }
+      .stage:nth-child(2) { border-right: 0; }
+    }
+    @media (max-width:620px) {
+      .wrap { width: min(100% - 24px,520px); }
+      h1 { font-size: 42px; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .metric:nth-child(2) { border-right: 0; }
+      .covers, .stages, .diagnosis { grid-template-columns: 1fr; }
+      .diagnosis .card:last-child { grid-column: auto; }
+      .stage { border-right: 0; border-bottom: 1px solid var(--line); }
+      .stage:last-child { border-bottom: 0; }
+    }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="topbar"><b>{{ACCOUNT_NAME}} 账号拆解</b><a class="btn" href="#growth">看发展路线</a></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">A</span><span>账号拆解</span></div>
+      <nav class="nav" aria-label="报告导航">
+        <a href="#overview">核心判断</a><a href="#evolution">账号演化</a><a href="#repeat">爆款资产</a><a href="#diagnosis">内容诊断</a><a href="#covers">真实封面</a><a href="#formula">可复制公式</a><a href="#compliance">合规边界</a><a href="#growth">发展路线</a>
+      </nav>
+      <p class="side-note">{{DATA_DATE}}<br>{{DATA_SOURCE}}</p>
+    </aside>
+    <main>
+      <div class="wrap" id="overview">
+        <header class="hero">
+          <div><div class="profile"><img class="avatar" src="{{AVATAR_PATH}}" alt="{{ACCOUNT_NAME}}头像"><div><strong>{{ACCOUNT_NAME}}</strong><span>{{ACCOUNT_CATEGORY}}</span></div></div><h1>{{CORE_STRATEGY_HEADLINE}}</h1><p class="lead">{{CORE_STRATEGY_EXPLANATION}}</p><div class="actions"><a class="btn primary" href="#repeat">看复用数据</a><a class="btn" href="{{ACCOUNT_URL}}">打开账号</a></div></div>
+          <div class="hero-visual"><img class="hero-cover" src="{{HERO_COVER_PATH}}" alt="{{HERO_COVER_ALT}}"><div class="verdict"><b>确定结论</b><p>{{HERO_VERDICT}}</p></div></div>
+        </header>
+      </div>
+      <div class="wrap metrics">{{METRIC_ITEMS}}</div>
+      <div class="wrap summary">{{STRATEGY_CARD}}{{ADVANTAGE_CARD}}{{PROBLEM_CARD}}</div>
+      <section id="evolution"><div class="wrap"><div class="section-head"><h2>{{EVOLUTION_TITLE}}</h2><p>{{EVOLUTION_SCOPE_NOTE}}</p></div><div class="stages">{{EVOLUTION_STAGES}}</div><div class="callout">{{EVOLUTION_CONCLUSION}}</div></div></section>
+      <section id="repeat"><div class="wrap"><div class="section-head"><h2>{{REPEAT_TITLE}}</h2><p>{{REPEAT_EXPLANATION}}</p></div><div class="callout">{{REPEAT_CONCLUSION}}</div><div class="chart">{{REPEAT_SUMMARY}}<div class="chart-placeholder">{{CHART_OR_INLINE_BARS}}</div></div><div class="table-wrap">{{REPEAT_TABLE}}</div></div></section>
+      <section id="diagnosis"><div class="wrap"><div class="section-head"><h2>{{DIAGNOSIS_TITLE}}</h2><p>{{DIAGNOSIS_LEAD}}</p></div><div class="diagnosis">{{FIVE_DIAGNOSIS_CARDS}}</div></div></section>
+      <section id="covers"><div class="wrap"><div class="section-head"><h2>{{COVER_TITLE}}</h2><p>{{COVER_CONCLUSION}}</p></div><div class="covers">{{REAL_COVER_CARDS}}</div><div class="two-col">{{HIGH_LOW_COMPARISON}}</div></div></section>
+      <section id="formula"><div class="wrap"><div class="section-head"><h2>{{FORMULA_TITLE}}</h2><p>{{FORMULA_LEAD}}</p></div><div class="two-col"><div class="formula">{{FORMULA}}</div><div>{{COPY_ADD_AVOID_EVALUATE}}</div></div></div></section>
+      <section id="compliance"><div class="wrap"><div class="section-head"><h2>{{COMPLIANCE_TITLE}}</h2><p>{{COMPLIANCE_LEAD}}</p></div><div class="two-col">{{COMPLIANCE_ITEMS}}</div></div></section>
+      <section id="growth"><div class="wrap"><div class="section-head"><h2>{{GROWTH_TITLE}}</h2><p>{{GROWTH_LEAD}}</p></div><div class="callout">{{TRANSFER_FORMULA}}</div><div class="two-col">{{LEARN_FROM_CREATOR}}{{INITIAL_FOUNDATION}}</div><div class="stages">{{THREE_GROWTH_STAGES}}</div><div class="two-col">{{CONTENT_RATIO}}{{TITLE_EXAMPLES}}</div></div></section>
+      <section><div class="wrap sources">{{DATA_NOTE}}{{SOURCES}}</div></section>
+    </main>
+  </div>
+  <script>
+    const links=[...document.querySelectorAll('.nav a')];
+    const targets=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===`#${entry.target.id}`));}),{rootMargin:'-25% 0px -68% 0px'});
+    targets.forEach(target=>observer.observe(target));
+  </script>
+</body>
+</html>
