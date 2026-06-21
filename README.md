@@ -81,9 +81,11 @@ ache-chaijie-skill/
 ├── SKILL.md
 ├── assets/
 │   └── report-template.html
-└── references/
+├── references/
     ├── report-contract.md
     ├── xhs-knowledge-base.md
     ├── xhs-analysis.md
     └── tools.md
+└── scripts/
+    └── validate_report_links.py
 ```
