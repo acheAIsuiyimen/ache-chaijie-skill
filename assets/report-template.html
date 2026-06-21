@@ -23,6 +23,9 @@
     body { margin: 0; color: var(--ink); background: var(--bg); font: 15px/1.65 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; letter-spacing: 0; }
     h1, h2, h3, p, span, a, code, td, th { overflow-wrap: anywhere; }
     a { color: inherit; }
+    .evidence-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; color: var(--accent); font-size: 13px; font-weight: 750; text-decoration: none; }
+    .evidence-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .link-missing { display: inline-block; margin-top: 10px; color: var(--muted); font-size: 12px; }
     img { display: block; max-width: 100%; }
     .shell { display: grid; grid-template-columns: 236px minmax(0,1fr); min-height: 100dvh; }
     .sidebar { position: sticky; top: 0; height: 100dvh; padding: 24px 18px; border-right: 1px solid var(--line); background: rgba(255,255,255,.94); }
@@ -135,8 +138,8 @@
     <main>
       <div class="wrap" id="overview">
         <header class="hero">
-          <div><div class="profile"><img class="avatar" src="{{AVATAR_PATH}}" alt="{{ACCOUNT_NAME}}头像"><div><strong>{{ACCOUNT_NAME}}</strong><span>{{ACCOUNT_CATEGORY}}</span></div></div><h1>{{CORE_STRATEGY_HEADLINE}}</h1><p class="lead">{{CORE_STRATEGY_EXPLANATION}}</p><div class="actions"><a class="btn primary" href="#repeat">看复用数据</a><a class="btn" href="{{ACCOUNT_URL}}">打开账号</a></div></div>
-          <div class="hero-visual"><img class="hero-cover" src="{{HERO_COVER_PATH}}" alt="{{HERO_COVER_ALT}}"><div class="verdict"><b>确定结论</b><p>{{HERO_VERDICT}}</p></div></div>
+          <div><a href="{{ACCOUNT_URL}}" target="_blank" rel="noopener noreferrer" style="text-decoration:none"><div class="profile"><img class="avatar" src="{{AVATAR_PATH}}" alt="{{ACCOUNT_NAME}}头像"><div><strong>{{ACCOUNT_NAME}}</strong><span>{{ACCOUNT_CATEGORY}}</span></div></div></a><h1>{{CORE_STRATEGY_HEADLINE}}</h1><p class="lead">{{CORE_STRATEGY_EXPLANATION}}</p><div class="actions"><a class="btn primary" href="#repeat">看复用数据</a><a class="btn" href="{{ACCOUNT_URL}}" target="_blank" rel="noopener noreferrer">打开账号</a></div></div>
+          <div class="hero-visual"><a href="{{HERO_NOTE_URL}}" target="_blank" rel="noopener noreferrer" aria-label="查看代表笔记"><img class="hero-cover" src="{{HERO_COVER_PATH}}" alt="{{HERO_COVER_ALT}}"></a><div class="verdict"><b>确定结论</b><p>{{HERO_VERDICT}}</p><a class="evidence-link" href="{{HERO_NOTE_URL}}" target="_blank" rel="noopener noreferrer">查看原笔记 ↗</a></div></div>
         </header>
       </div>
       <div class="wrap metrics">{{METRIC_ITEMS}}</div>
